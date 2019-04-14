@@ -4,18 +4,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.regex.*;
 
 //This ckass contains several useful text file and csv file functions created
 //specificalyl for taking hackerrank data, and using it in arraylists and arrays
 //in my other projects
-public class usefulFunctions {
+public class UsefulFunctions {
     //read in files and into an array @params file: the relative path to file isTexT: true or false
     //true; pulls out all text; false, pulls out only numbers.
     //good for parsing strings line by line OR
     //good for parsing integers one number by one number
-    public <T> ArrayList<T> fileLineReader(String file, boolean type) throws FileNotFoundException {
+    public <T> ArrayList<T> fileLineReader(String file, boolean type)  {
         ArrayList fileLines = new ArrayList<>();
         //put strings into array list
         if (type) {
@@ -25,13 +24,23 @@ public class usefulFunctions {
                     fileLines.add(line);
                 }
             }  catch (IOException e) {
+                //simply print the chain of calls to see where our error
+                //could be from. Note, we are calling this method on the
+                //object 'e', e is the object created by the error in the try block
                 e.printStackTrace();
             }
         }
         else {
-            Scanner scanner = new Scanner(new File(file));
-            while(scanner.hasNextInt()) {
-                fileLines.add(scanner.nextInt());
+            try {
+                Scanner scanner = new Scanner(new File(file));
+
+                while (scanner.hasNextInt()) {
+
+                    fileLines.add(scanner.nextInt());
+                }
+            }
+            catch (FileNotFoundException i) {
+                i.printStackTrace();
             }
         }
         return fileLines;
@@ -67,9 +76,11 @@ public class usefulFunctions {
         //and pattern matching. holy shit lol
         for (int i = 0; i < lineCount; i++) {
             ArrayList<Integer> numbersInALine = new ArrayList<>();
-            //ignores spaces, slashes, etc
+            //we must first compile a pattern object
             Pattern tokSplitter = Pattern.compile("[^\\s\"']+|\"([^\"]*)\"");
             String tokens = reader.readLine();
+            //we then construct a matcher object by invoking
+            //the matcher method on a pattern object
             Matcher m = tokSplitter.matcher(tokens); //match on the current line
             //this while loop will parse the matches into
             while (m.find()) {
@@ -103,26 +114,50 @@ public class usefulFunctions {
     }
 
 
+    //write to a file, this is just a quick method before i got to the gym
+    public void  writeToAFile(){
 
 
+            File file=new File("writeToMe.txt");
+
+            try{
+
+                PrintWriter output=new PrintWriter("writeToMe.txt");
+                //oh so this is how you do it. GAY!
+                //time to go tp the gym
+                output.println("ethan is a faggot");
+
+                output.close();
+
+            } catch(IOException x){
+                x.printStackTrace();
+            }
+    }
+
+    //this method is merely for quick debugging because im fucking tired of
+    //typing so many letts to print shit
+    public static void p(String printMeFast) {
+        System.out.println(printMeFast);
+    }
 
 
     //this is the program driver, we need to run this to have our code compile so that we can make a jar!!
     public static void main(String [] args) throws IOException {
         System.out.println("Making our first jar file");
 
-        /*usefulFunctions uf = new usefulFunctions();
+        UsefulFunctions uf = new UsefulFunctions();
         int sum = uf.stringToInteger("convertThisTiInteger");
 
-       // String stuff = uf.fileLineReader("runthis.txt",true);
-        System.out.println(sum);
-        */
 
-        usefulFunctions uf = new usefulFunctions();
+       ArrayList<String> stuff = uf.fileLineReader("runthis.txt",true);
+       System.out.println(sum);
 
 
+        uf.writeToAFile();
+
+
+        p("hello world");
 
     }
-
 
 }
