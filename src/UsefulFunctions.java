@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.*;
 
-//This ckass contains several useful text file and csv file functions created
-//specificalyl for taking hackerrank data, and using it in arraylists and arrays
+//This class contains several useful text file and csv file functions created
+//specifically for taking hackerrank data, and using it in arraylists and arrays
 //in my other projects
 public class UsefulFunctions {
     //read in files and into an array @params file: the relative path to file isTexT: true or false
@@ -115,7 +115,7 @@ public class UsefulFunctions {
 
 
     //write to a file, this is just a quick method before i got to the gym
-    public void  writeToAFile(){
+    public void  writeToAFile(String toWrite){
 
 
             File file=new File("writeToMe.txt");
@@ -125,7 +125,7 @@ public class UsefulFunctions {
                 PrintWriter output=new PrintWriter("writeToMe.txt");
                 //oh so this is how you do it. GAY!
                 //time to go tp the gym
-                output.println("ethan is a faggot");
+                output.println(toWrite);
 
                 output.close();
 
@@ -133,14 +133,27 @@ public class UsefulFunctions {
                 x.printStackTrace();
             }
     }
+    //input length for a random number length n
+    public final static long createRandomNumber(long len) {
+        //all numbers in Java cap out at 18 digits
+        if (len > 18)
+            throw new IllegalStateException("To many digits");
+        long tLen = (long) Math.pow(10, len - 1) * 9;
 
+        long number = (long) (Math.random() * tLen) + (long) Math.pow(10, len - 1) * 1;
+        //check if the #'s String equiv is of len specified
+        String  tVal = number + "";
+        if (tVal.length() != len) {
+            throw new IllegalStateException("The random number '" + tVal + "' is not '" + len + "' digits");
+        }
+        //otherwise give the number
+        return number;
+    }
     //this method is merely for quick debugging because im fucking tired of
-    //typing so many letts to print shit
+    //typing so many letts to print shit, make global somehow?
     public static void p(String printMeFast) {
         System.out.println(printMeFast);
     }
-
-
     //this is the program driver, we need to run this to have our code compile so that we can make a jar!!
     public static void main(String [] args) throws IOException {
         System.out.println("Making our first jar file");
@@ -149,15 +162,12 @@ public class UsefulFunctions {
         int sum = uf.stringToInteger("convertThisTiInteger");
 
 
-       ArrayList<String> stuff = uf.fileLineReader("runthis.txt",true);
+       ArrayList<String> stuff = uf.fileLineReader("data/runthis.txt",true);
        System.out.println(sum);
 
 
-        uf.writeToAFile();
+        uf.writeToAFile("Some stuff");
 
-
-        p("hello world");
 
     }
-
 }
