@@ -52,8 +52,7 @@ public class RandDataGen implements Serializable {
             p("After serial: "+dataObject.toString());
         }
     }
-    //notice in main we must cast the object. Because it doesn't know
-    //what kind of object is being returned
+    ///fixed, change
     public static Object  readObjectFromFile(String filepath) {
         try {
             // read object from file
