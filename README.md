@@ -1,6 +1,18 @@
-This mini project is for (md = markdown)
-useFul functions I use with hackerrank and other
-text files. It is my first java artifact, meaning
-I use its out file to include its jar into other
-project I am using. There is no security, you
-can see the source code.
+# Java-Artifact-Lib
+This projects contains several functions that I commonly use across all my of Java projects. It is compress as a library (Artifact) and can be included in any general Java project.
+
+## Getting Started
+Just fork it.
+
+### Prerequisites
+
+Java.
+
+## Built With Java and standard util lib
+
+## Contributing
+
+Noah D Garner
+
+## Versioning
+
